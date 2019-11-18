@@ -3,11 +3,11 @@ import Router from 'vue-router'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _4136f3f3 = () => interopDefault(import('../pages/test/index.vue' /* webpackChunkName: "pages/test/index" */))
-const _e970e5c6 = () => interopDefault(import('../pages/users/index.vue' /* webpackChunkName: "pages/users/index" */))
-const _b628e7b0 = () => interopDefault(import('../pages/users/register.vue' /* webpackChunkName: "pages/users/register" */))
-const _fabf9a76 = () => interopDefault(import('../pages/users/_id.vue' /* webpackChunkName: "pages/users/_id" */))
-const _1218a7e4 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _29cc43aa = () => interopDefault(import('../pages/test/index.vue' /* webpackChunkName: "pages/test/index" */))
+const _1dc1e9e5 = () => interopDefault(import('../pages/users/index.vue' /* webpackChunkName: "pages/users/index" */))
+const _725e9a60 = () => interopDefault(import('../pages/users/register.vue' /* webpackChunkName: "pages/users/register" */))
+const _efc9bce6 = () => interopDefault(import('../pages/users/_id.vue' /* webpackChunkName: "pages/users/_id" */))
+const _33aa3aac = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 Vue.use(Router)
 
@@ -20,23 +20,23 @@ export const routerOptions = {
 
   routes: [{
     path: "/test",
-    component: _4136f3f3,
+    component: _29cc43aa,
     name: "test"
   }, {
     path: "/users",
-    component: _e970e5c6,
+    component: _1dc1e9e5,
     name: "users"
   }, {
     path: "/users/register",
-    component: _b628e7b0,
+    component: _725e9a60,
     name: "users-register"
   }, {
     path: "/users/:id",
-    component: _fabf9a76,
+    component: _efc9bce6,
     name: "users-id"
   }, {
     path: "/",
-    component: _1218a7e4,
+    component: _33aa3aac,
     name: "index"
   }],
 

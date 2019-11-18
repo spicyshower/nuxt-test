@@ -2,18 +2,24 @@
   <section class="container">
     <div>
       <app-logo />
-      <h1 class="title">users/_id</h1>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green"
-          >Documentation</a
-        >
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-          >GitHub</a
-        >
-      </div>
+      <h3>{{user.id}}</h3>
+      <img :src="user.profile_image_url" width="120" alt="">
+      <p>{{user.description || 'No description'}}</p>
+      <p>
+        <nuxt-link to="/">
+          <small><b>トップへ戻る</b></small>
+        </nuxt-link>
+      </p>
+      <h3>{{user.id}}さんの投稿一覧</h3>
+      <ul>
+        <li v-for="item in items" :key="item.id">
+          <h4>
+            <span>{{item.title}}</span>
+          </h4>
+          <div>{{item.body.slice(0, 130)}}……</div>
+          <p><a target="_blank" :href="item.url">{{item.url}}</a></p>
+        </li>
+      </ul>
     </div>
   </section>
 </template>
@@ -24,6 +30,13 @@ import AppLogo from "~/components/AppLogo.vue";
 export default {
   components: {
     AppLogo
+  },
+  async asyncData({ route, app }) {
+    const user = await app.$axios.$get(`https://qiita.com/api/v2/users/${route.params.id}`)
+    const items = await app.$axios.$get(`https://qiita.com/api/v2/items?query=${route.params.id}`)
+    return{
+      user, items
+    }
   }
 };
 </script>
@@ -34,7 +47,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
+  text-align: left;
 }
 
 .title {
