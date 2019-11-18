@@ -2,20 +2,21 @@
   <section class="container">
     <div>
       <app-logo />
-      <h1 class="title">
-        my-first-nuxt-app Hello, world
-      </h1>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green"
-          >Documentation</a
-        >
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-          >GitHub</a
-        >
-      </div>
+      <ul>
+        <li v-for="item in items" :key="item.id">
+          <h4>
+            <span>{{item.title}} </span>
+            <small>
+              <span>by </span>
+              <nuxt-link :to="`/users/${item.user.id}`">
+                {{item.user.id}}
+              </nuxt-link>
+            </small>
+          </h4>
+          <div>{{item.body.slice(0, 130)}}……</div>
+          <p><a target="_blank" :href="item.url">{{item.url}}</a></p>
+        </li>
+      </ul>
     </div>
   </section>
 </template>
@@ -27,16 +28,11 @@ export default {
   components: {
     AppLogo
   },
-  async mounted() {
-    console.log(
-      JSON.stringify(
-        await this.$axios.$get(
-          "https://qiita.com/api/v2/items?query=tag:nuxt.js"
-        ),
-        true,
-        ""
-      )
-    );
+  async asyncData({ app }) {
+    const items = await app.$axios.$get('https://qiita.com/api/v2/items?query=tag:nuxt.js')
+    return{
+      items
+    }
   }
 };
 </script>
@@ -44,10 +40,11 @@ export default {
 <style>
 .container {
   min-height: 100vh;
+  padding: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
+  text-align: left;
 }
 
 .title {
@@ -70,5 +67,19 @@ export default {
 
 .links {
   padding-top: 15px;
+}
+
+h3 {
+  margin: 16px 0;
+  padding: 8px 0;
+  border-bottom: solid 1px #e5e5e5;
+}
+
+li + li {
+  margin: 16px 0;
+}
+
+p {
+  margin: 8px 0;
 }
 </style>
